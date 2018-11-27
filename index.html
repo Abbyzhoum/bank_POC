@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/bootstrap/bootstrap.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
+  <script src="./data/data.js"></script>
+  <title></title>
+</head>
+<body>
+  <div id="main">
+      <div class="navbar-header">
+          <a class="navbar-brand navbar-brand-tm" href="#">
+              <img alt="Brand" src="./img/logo-navbar.png">
+          </a>
+      </div>
+      <br>
+
+      <div class="title form-group" >
+        <p >手机号码检测</p>
+      </div>
+      <!-- style="width:50%;"   style="margin-left:55%;margin-top:8%;"  style="margin-left:100%;margin-top:8%;" style="margin-left:100%;margin-top:8%;" -->
+      <div class="form-group" style="text-align: center;margin-top: 40px;margin-left:10%">
+          <input type="file" id="fileUrl" accept="text/plain" name='filename'  class="form-control  col-sm-10" @change="handleChange" style="width:40%;margin-left:20%">
+          <button type="button" @click="uploadFile" class="btn btn-primary  col-sm-1" style="margin-right:40px">提交</button>
+          <button class="btn btn-primary  col-sm-1" @click="download">导出</button>
+      </div>
+      <!-- v-show="result.length !== 0" -->
+      <div class="form-group"  v-show="result.length !== 0">
+        <div> 
+          <h4 class="modal-title col-sm-9" style="margin-top:50px;margin-bottom: 20px;font-size: 26px;">
+            检测结果:
+          </h4>
+        
+        </div>
+       <div>
+          <table class="table table-hover table-condensed table-striped table-bordered" style="border:1px solid black">
+              <thead>
+                <tr>
+                  <th>手机号码</th>
+                  <th>地区</th>  
+                  <th>号码类型</th>
+                  <th>结果</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) in result" :key="index">
+                  <td>{{item.mobile}}</td>
+                  <td>{{item.area}}</td>
+                  <td>{{item.numberType}}</td>
+                  <td>{{item.status}}</td>
+                </tr>
+              </tbody>
+            </table>
+       </div>
+
+       </div>
+
+    </div>
+</body>
+</html>
+<script src="./app.js"></script>
