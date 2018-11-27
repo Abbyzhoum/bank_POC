@@ -9,7 +9,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 
-  <script src="./data/data.js"></script>
   <title></title>
 </head>
 <body>
@@ -24,13 +23,13 @@
       <div class="title form-group" >
         <p >手机号码检测</p>
       </div>
-      <!-- style="width:50%;"   style="margin-left:55%;margin-top:8%;"  style="margin-left:100%;margin-top:8%;" style="margin-left:100%;margin-top:8%;" -->
+     
       <div class="form-group" style="text-align: center;margin-top: 40px;margin-left:10%">
           <input type="file" id="fileUrl" accept="text/plain" name='filename'  class="form-control  col-sm-10" @change="handleChange" style="width:40%;margin-left:20%">
           <button type="button" @click="uploadFile" class="btn btn-primary  col-sm-1" style="margin-right:40px">提交</button>
-          <button class="btn btn-primary  col-sm-1" @click="download">导出</button>
+          <button class="btn btn-primary  col-sm-1" @click="clickDownload"  download="downlaod.csv">导出</button>
       </div>
-      <!-- v-show="result.length !== 0" -->
+
       <div class="form-group"  v-show="result.length !== 0">
         <div> 
           <h4 class="modal-title col-sm-9" style="margin-top:50px;margin-bottom: 20px;font-size: 26px;">
@@ -53,7 +52,7 @@
                   <td>{{item.mobile}}</td>
                   <td>{{item.area}}</td>
                   <td>{{item.numberType}}</td>
-                  <td>{{item.status}}</td>
+                  <td>{{item.status | showStatus}}</td>
                 </tr>
               </tbody>
             </table>
