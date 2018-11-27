@@ -27,7 +27,7 @@
       <div class="form-group" style="text-align: center;margin-top: 40px;margin-left:10%">
           <input type="file" id="fileUrl" accept="text/plain" name='filename'  class="form-control  col-sm-10" @change="handleChange" style="width:40%;margin-left:20%">
           <button type="button" @click="uploadFile" class="btn btn-primary  col-sm-1" style="margin-right:40px">提交</button>
-          <button class="btn btn-primary  col-sm-1" @click="clickDownload"  download="downlaod.csv">导出</button>
+          <button class="btn btn-primary  col-sm-1" @click="clickDownload" :disabled="!candownload">导出</button>
       </div>
 
       <div class="form-group"  v-show="result.length !== 0">

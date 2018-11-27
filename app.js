@@ -107,7 +107,6 @@
     }
   }
 
-
   var app = new Vue({
     el: '#main',
     data: {
@@ -116,13 +115,16 @@
         password: 'pwd3669175',
         mobiles: ''
       },
-      result: []
+      result: [],
+      candownload: false
     },
     methods: {
       handleChange:function (e) {
         var that = this
-        console.log(1)
-        var filename=e.target.files[0].name;
+        if(!e.target.files[0]){
+          return
+        }
+
         var rABS = typeof FileReader !== 'undefined' && typeof FileReader.prototype !== 'undefined' && typeof FileReader.prototype.readAsBinaryString !== 'undefined';  
         var reader=new FileReader();
         if(rABS){
@@ -134,23 +136,12 @@
 		  reader.onload = function(e) {
         var data = e.target.result;
         that.upload.mobiles = data
-      //   console.log(data)
-      //   var str = null;
-      //   var viewBuf = null;
-      //   if(rABS) {
-      //    str = data;
-      //    var newArray = [];
-      //    for (var index = 0; index < data.length; index++) {
-      //        newArray.push(data.charCodeAt(index));
-      //    }
-      //    viewBuf = new Uint8Array(newArray);
-      // }
        }
       },
       uploadFile:function () {
       var that = this
-      console.log(this.upload.mobiles)
-        if (this.upload.mobiles === '') {
+
+        if (this.upload.mobiles === '' || !$('#fileUrl').val()) {
           alert('请选择一个文件上传')
           return
         }
@@ -165,11 +156,11 @@
           if(data.resultCode === '000000'){
             $('#table').removeClass('display')
             that.result = data.resultObj
-            console.log(that.result)
+            that.candownload = true
           } else {
+            that.candownload = false
             alert('上传文件失败，请重新尝试！')
-          }
-          
+          }       
         },
         error: function (err) {
           alert('上传文件失败，请重新尝试！')
